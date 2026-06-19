@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dsw2026Ej15.Domain.Entities
 {
-    public abstract class BaseEntity //CAMBIO
+    public abstract class BaseEntity 
     {
         public Guid Id { get; init; }
 

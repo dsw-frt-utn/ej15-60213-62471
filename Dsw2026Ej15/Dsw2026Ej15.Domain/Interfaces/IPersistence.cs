@@ -15,5 +15,10 @@ namespace Dsw2026Ej15.Domain.Interfaces
         */
         Speciality? GetSpecialityById(Guid Id);
         void SaveDoctor(Doctor doctor);
+
+        List<Doctor> getActiveDoctors();
+
+        Doctor? getDoctorById(Guid id);
     }
 }
+

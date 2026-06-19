@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dsw2026Ej15.Domain.Entities
 {
-    public class Doctor : BaseEntity //CAMBIOS
+    public class Doctor : BaseEntity 
     {
         public string Name { get; init; }
 

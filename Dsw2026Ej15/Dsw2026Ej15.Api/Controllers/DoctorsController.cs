@@ -1,4 +1,5 @@
 ﻿using Dsw2026Ej15.Api.Models;
+using Dsw2026Ej15.Data;
 using Dsw2026Ej15.Domain.Entities;
 using Dsw2026Ej15.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -34,4 +35,28 @@ public class DoctorsController : AppController
 
         return Created(); //201
     }
+
+    [HttpGet("doctors")]
+    public ActionResult<IEnumerable<Doctor>> obtenerDoctoresActivos()
+    {
+        List<Doctor> doctores = new List<Doctor>();
+        doctores = _persistence.getActiveDoctors();
+        return Ok(doctores);
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<Doctor> obtenerDoctorPorId(Guid id)
+    {
+        Doctor? doctor = null;
+        try
+        {
+            doctor = _persistence.getDoctorById(id);
+        }
+        catch (Exception ex)
+        {
+            return NotFound();
+        }
+        return Ok(doctor);
+    }
+
 }

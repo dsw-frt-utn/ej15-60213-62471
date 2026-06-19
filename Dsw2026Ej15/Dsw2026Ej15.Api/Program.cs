@@ -25,13 +25,6 @@ namespace Dsw2026Ej15.Api
                 app.UseSwaggerUI();
             }
 
-            /*
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
-            */
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

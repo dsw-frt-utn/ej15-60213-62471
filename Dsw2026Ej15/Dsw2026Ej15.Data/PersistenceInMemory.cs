@@ -19,6 +19,11 @@ namespace Dsw2026Ej15.Data
             LoadSpecialities(); 
         }
 
+        public List<Doctor> getActiveDoctors()
+        {
+            return _doctors.Where(x => x.IsActive == true).ToList();
+        }
+
         public Speciality? GetSpecialityById(Guid Id)
         {
             return _specialities.SingleOrDefault(e => e.Id == Id);
@@ -27,6 +32,19 @@ namespace Dsw2026Ej15.Data
         public void SaveDoctor(Doctor doctor)
         {
             _doctors.Add(doctor);
+        }
+        public Doctor? getDoctorById(Guid id)
+        {
+            Doctor? doctor = null;
+
+            doctor = _doctors.FirstOrDefault(x => x.Id == id);
+
+            if (doctor == null)
+            {
+                throw new ArgumentNullException("id");
+            }
+
+            return doctor;
         }
 
         private void LoadSpecialities()
@@ -43,7 +61,7 @@ namespace Dsw2026Ej15.Data
             }
             catch(Exception ex)
             {
-
+                return;
             }
 
         }
