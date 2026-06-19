@@ -1,0 +1,81 @@
+﻿using Dsw2026Ej15.Data.Dtos;
+using Dsw2026Ej15.Domain.Entities;
+using Dsw2026Ej15.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Json;
+using System.Windows.Markup;
+
+namespace Dsw2026Ej15.Data
+{
+    public class PersistenceInMemory : IPersistence
+    {
+        private List<Speciality> _specialities = [];
+        private List<Doctor> _doctors = [];
+
+        public PersistenceInMemory()
+        {
+            LoadSpecialities(); 
+        }
+
+        public List<Doctor> getActiveDoctors()
+        {
+            return _doctors.Where(x => x.IsActive == true).ToList();
+        }
+
+        public Speciality? GetSpecialityById(Guid Id)
+        {
+            return _specialities.SingleOrDefault(e => e.Id == Id);
+        }
+
+        public void SaveDoctor(Doctor doctor)
+        {
+            _doctors.Add(doctor);
+        }
+        public Doctor? getDoctorById(Guid id)
+        {
+            Doctor? doctor = null;
+
+            doctor = _doctors.FirstOrDefault(x => x.Id == id);
+
+            if (doctor == null)
+            {
+                throw new ArgumentNullException("id");
+            }
+
+            return doctor;
+        }
+
+        public void disableDoctor(Doctor doctor)
+        {
+            Doctor? doctor1 = getDoctorById(doctor.Id);
+
+            _doctors.Remove(doctor1);
+
+            doctor1.IsActive = false;
+
+            _doctors.Add(doctor1);
+        }
+
+        private void LoadSpecialities()
+        {
+            try
+            {
+                string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sources", "specialities.json");
+                var json = File.ReadAllText(jsonPath);
+                var specialities = JsonSerializer.Deserialize<List<SpecialityDto>>(json, new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                }) ?? [];
+                _specialities = [.. specialities.Select(s => new Speciality(s.Name, s.Description, s.Id))];
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
+
+        }
+
+    }
+}
