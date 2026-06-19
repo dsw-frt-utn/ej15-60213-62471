@@ -59,4 +59,18 @@ public class DoctorsController : AppController
         return Ok(doctor);
     }
 
+    [HttpDelete("doctors")]
+    public ActionResult<string> deshabilitarDoctor(Guid id)
+    {
+        try
+        {
+            _persistence.disableDoctor(_persistence.getDoctorById(id));
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return NotFound();
+        }
+    }
+
 }

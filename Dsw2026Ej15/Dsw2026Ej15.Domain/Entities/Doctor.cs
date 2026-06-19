@@ -10,7 +10,7 @@ namespace Dsw2026Ej15.Domain.Entities
 
         public string LicenseNumber { get; init; }
 
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; set; }
 
         public Speciality? Speciality { get; private set; }
 

@@ -19,6 +19,9 @@ namespace Dsw2026Ej15.Domain.Interfaces
         List<Doctor> getActiveDoctors();
 
         Doctor? getDoctorById(Guid id);
+        void disableDoctor(Doctor doctor);
+
+
     }
 }
 

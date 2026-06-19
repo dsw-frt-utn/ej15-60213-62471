@@ -47,6 +47,17 @@ namespace Dsw2026Ej15.Data
             return doctor;
         }
 
+        public void disableDoctor(Doctor doctor)
+        {
+            Doctor? doctor1 = getDoctorById(doctor.Id);
+
+            _doctors.Remove(doctor1);
+
+            doctor1.IsActive = false;
+
+            _doctors.Add(doctor1);
+        }
+
         private void LoadSpecialities()
         {
             try
