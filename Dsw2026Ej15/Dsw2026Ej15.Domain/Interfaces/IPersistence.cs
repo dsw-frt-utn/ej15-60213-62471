@@ -13,5 +13,7 @@ namespace Dsw2026Ej15.Domain.Interfaces
         Doctor? GetDoctorById(Guid id);
         void DeleteDoctor(Guid id);
         */
+        Speciality? GetSpecialityById(Guid Id);
+        void SaveDoctor(Doctor doctor);
     }
 }
