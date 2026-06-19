@@ -13,26 +13,25 @@ namespace Dsw2026Ej15.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Swagger
-            builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IPersistence, PersistenceInMemory>();
 
             var app = builder.Build();
 
-            // Swagger
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            /*
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
             }
-
+            */
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
